@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-jscs');
@@ -10,20 +11,14 @@ module.exports = function(grunt) {
         jshintrc: true
       }
     },
+
     jscs: {
-      all: {
-        options: {
-          //standard: 'airbnb'
-          // 'preset':'aribnb'
-        },
-        files: {
-          src: [ 'server.js']
-        }
+      src: 'server.js',
+      options: {
+        config: '.jscsrc'
       }
-    },
-
+    }
   });
-
-  grunt.registerTask('test', ['jshint','jscs']);
-  grunt.registerTask('default',  ['test']);
+  grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha']);
+  grunt.registerTask('default', ['test']);
 };
