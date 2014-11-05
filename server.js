@@ -10,24 +10,25 @@ var port = 3000;
 moment.relativeTimeThreshold('d', 365);
 moment.relativeTimeThreshold('M', 60);
 
-app.get('/', function(req, res){
+app.get('/', function(req, res) {
   var html = '<h3>Enter a date to see the difference in time from today.</h3>' +
     '<br><form action="/" method="post">' +
     ' Enter Date: <input type="text" name="inputDate" ' +
-    'placeholder="'+
-    moment().format('MM-DD-YYYY')+
+    'placeholder="' +
+    moment().format('MM-DD-YYYY') +
     '"/><button type="submit" value="Submit">' +
     'Submit</button></form>';
 
   res.send(html);
 });
 
-app.post('/', function(req, res){
+app.post('/', function(req, res) {
   var now = moment();
   var dateEntered = moment(req.body.inputDate);
   var dateDif = dateEntered.diff(now);
   var humanDif = moment.duration(dateDif).humanize(true);
-  var html='<h2>'+dateEntered.format('MM-DD-YYYY')+' occurs '+humanDif+' </h2>';
+  var html = '<h2>' + dateEntered.format('MM-DD-YYYY') +
+  ' occurs ' + humanDif + ' </h2>';
 
   res.send(html);
 });
